@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
@@ -18,7 +19,7 @@ public class movement_samourail : MonoBehaviour
 
         anim = GetComponent<Animator>();
     }
-
+   
     
     private void Update()
     {
@@ -49,11 +50,12 @@ public class movement_samourail : MonoBehaviour
 
         //set animator parametres
         anim.SetBool("run", horizontalInput != 0);
-       
+
     }
 
+    
+    
 
-   
 
 
 }
