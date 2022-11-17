@@ -4,31 +4,46 @@ using UnityEngine;
 
 public class player_attack : MonoBehaviour
 {
-    private Animator anim;
-    private movement_samourail playerMovement;
-    [SerializeField] private float attackCooldown;
-    private float cooldownTimer = Mathf.Infinity;
+    public Animator animator;
 
-    private void Awake()
-    {
-        anim = GetComponent<Animator>();
-        playerMovement = GetComponent<movement_samourail>();
-    }
+    public Transform AttackPoint;
+    public LayerMask ennemyLayers;
+
+    public float attackRange = 0.5f;
+    public int attackDamage = 100;
+   
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown)
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Attack();
-
-
-            cooldownTimer += Time.deltaTime;
         }
     }
 
-    private void Attack()
+    void Attack()
     {
-        cooldownTimer = 0;
-        anim.SetTrigger("attack");
+        animator.SetTrigger("attack");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, attackRange, ennemyLayers);
+
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+        }
+
+        
+
+        
+    }
+
+     void OnDrawGizmosSelected()
+    {
+        if( AttackPoint == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(AttackPoint.position, attackRange);
     }
 }

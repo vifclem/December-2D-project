@@ -11,12 +11,20 @@ public class frog_attack : MonoBehaviour
     private AI_chase ennemyMovement;
     private Transform target;
 
+    public Animator animator;
+
+    public Transform AttackPoint;
+    public LayerMask ennemyLayers;
+
+    public float attackRange = 0.5f;
+    public int attackDamage = 100;
+
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
-    // Start is called before the first frame update
+    
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -39,6 +47,17 @@ public class frog_attack : MonoBehaviour
     {
         cooldownTimer = 2;
         anim.SetTrigger("tong attack");
-        
+       
+
+
+    }
+    void OnDrawGizmosSelected()
+    {
+        if (AttackPoint == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(AttackPoint.position, attackRange);
     }
 }
