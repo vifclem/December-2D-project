@@ -10,7 +10,7 @@ public class player_attack : MonoBehaviour
     public LayerMask ennemyLayers;
 
     public float attackRange = 0.5f;
-    public int attackDamage = 100;
+    public int attackDamage = 50;
    
 
     private void Update()
