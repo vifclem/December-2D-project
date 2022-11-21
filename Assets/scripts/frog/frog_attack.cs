@@ -60,4 +60,14 @@ public class frog_attack : MonoBehaviour
 
         Gizmos.DrawWireSphere(AttackPoint.position, attackRange);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            player_health playerHealth = collision.transform.GetComponent<player_health>();
+            playerHealth.TakeDamage(10);
+        }
+    }
+
 }
