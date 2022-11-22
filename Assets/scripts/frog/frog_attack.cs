@@ -17,7 +17,7 @@ public class frog_attack : MonoBehaviour
     public LayerMask ennemyLayers;
 
     public float attackRange = 0.5f;
-    public int attackDamage = 100;
+    
 
 
     private void Start()
@@ -69,5 +69,10 @@ public class frog_attack : MonoBehaviour
             playerHealth.TakeDamage(10);
         }
     }
+
+    
+
+
+
 
 }

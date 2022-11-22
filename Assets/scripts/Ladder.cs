@@ -16,7 +16,7 @@ public class Ladder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vertical = Input.GetAxis("Vertcial");
+        vertical = Input.GetAxis("Vertical");
 
         if(isLadder && Mathf.Abs(vertical) > 0f)
         {
