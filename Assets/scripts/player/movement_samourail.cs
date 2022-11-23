@@ -8,14 +8,34 @@ public class movement_samourail : MonoBehaviour
 {
     public float speed = 5f;
     public float JumpForce = 2f;
-    private Rigidbody2D _rigidbody;
-    private Animator anim;
-   
+    public Rigidbody2D rb;
+    public Animator anim;
+    public CapsuleCollider2D playerCollider;
+
+    
+    public static movement_samourail instance;
+    
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("Il y a plus d'une instance de movementSamourail dans la scene");
+            return;
+        }
+        instance = this;
+    }
+
+
+
+
+
+
 
     private void Start()
     {
         //Grab references for rigidBody and animator
-        _rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 
         anim = GetComponent<Animator>();
     }
@@ -33,9 +53,9 @@ public class movement_samourail : MonoBehaviour
 
 
         // Jump
-        if (Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
+        if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f)
         {
-            _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
         }
 
 

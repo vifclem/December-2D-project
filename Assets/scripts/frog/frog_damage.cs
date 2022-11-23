@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class scr : MonoBehaviour
+public class frog_damage : MonoBehaviour
 {
     public int attackDamage = 10; 
     // Start is called before the first frame update

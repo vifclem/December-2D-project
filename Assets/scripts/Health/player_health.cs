@@ -12,6 +12,18 @@ public class player_health : MonoBehaviour
 
 
     public Health_bar healthBar;
+    public static player_health instance;
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Debug.LogWarning("Il y a plus d'une instance de playerHealth dans la scene");
+            return;
+        }
+        instance = this;
+    }
+
 
     void Start()
     {
@@ -24,20 +36,50 @@ public class player_health : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage(20);
+            TakeDamage(60);
         }
     }
+    public void HealPlayer(int amount)
+    {
+        if(currentHealth + amount > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            currentHealth += amount;
+        }
+
+        healthBar.SetHealth(currentHealth);
+    }
+
+
     public void TakeDamage(int damage)
     {
         if (!isInvicible)
         {
             currentHealth -= damage;
             healthBar.SetHealth(currentHealth);
+            if(currentHealth <= 0)
+            {
+                Die();
+                return;
+            }
+
             isInvicible = true;
             StartCoroutine(InvicibilityFlash());
             StartCoroutine(HandleInvicibilityDelay());
         }
        
+    }
+
+    public void Die()
+    {
+        Debug.Log("joueur eliminé");
+        movement_samourail.instance.enabled = false;
+        movement_samourail.instance.anim.SetTrigger("die");
+        movement_samourail.instance.rb.bodyType = RigidbodyType2D.Kinematic;
+        movement_samourail.instance.playerCollider.enabled = false;
     }
 
     public IEnumerator InvicibilityFlash()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class frog_attack : MonoBehaviour
+public class frog_attackAnim : MonoBehaviour
 {
     private Animator anim;
     private float cooldownTimer = Mathf.Infinity;
