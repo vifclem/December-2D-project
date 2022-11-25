@@ -80,6 +80,8 @@ public class player_health : MonoBehaviour
         movement_samourail.instance.anim.SetTrigger("die");
         movement_samourail.instance.rb.bodyType = RigidbodyType2D.Kinematic;
         movement_samourail.instance.playerCollider.enabled = false;
+        GameOverManager.instance.OnPlayerDeath();
+
     }
 
     public IEnumerator InvicibilityFlash()
