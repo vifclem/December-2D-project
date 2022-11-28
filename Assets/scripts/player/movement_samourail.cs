@@ -11,6 +11,8 @@ public class movement_samourail : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
     public CapsuleCollider2D playerCollider;
+    public bool isClimbing;
+    public bool isGrounded;
 
     
     public static movement_samourail instance;
@@ -43,20 +45,32 @@ public class movement_samourail : MonoBehaviour
     
     private void Update()
     {
+
         float horizontalInput = Input.GetAxisRaw("Horizontal");
-
-        //move right and left 
+        float verticalInput = Input.GetAxisRaw("Vertical");
         var movement = horizontalInput;
-        transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * speed;
+        var movementy = verticalInput;
 
-
-
-
-        // Jump
-        if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f)
+        if (!isClimbing)
         {
-            rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            //move right and left 
+           
+            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * speed;
+
+            // Jump
+            if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) < 0.001f)
+            {
+                rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            }
         }
+        else
+        {
+            //deplacement vertical
+            transform.position += new Vector3(movementy, 0, 0) * Time.deltaTime * speed;
+
+        }
+
+      
 
 
 
