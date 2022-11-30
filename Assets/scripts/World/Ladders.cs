@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class Ladders : MonoBehaviour
 {
-    private bool isInRange;
-    private movement_samourail playerMovment;
-    //public BoxCollider2D topCollider;
-   // private Text InteractUI;
+    public bool isInRange;
+    public movement_samourail playerMovment;
+    public BoxCollider2D topCollider;
+    public Text InteractUI;
     void Awake()
     {
         //InteractUI = GameObject.FindGameObjectWithTag("InteractUI").GetComponent<Text>();
@@ -18,35 +18,16 @@ public class Ladders : MonoBehaviour
         if (isInRange && playerMovment.isClimbing && Input.GetKeyDown(KeyCode.E))
         {
             playerMovment.isClimbing = true;
-            //topCollider.isTrigger = false;
-           // return;
+            topCollider.isTrigger = true;
+            return;
         }
 
-       //if (isInRange && Input.GetKeyDown(KeyCode.E))
-        //{
-            //playerMovment.isClimbing = true;
-           // topCollider.isTrigger = true;
-        //}
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+       if (isInRange && Input.GetKeyDown(KeyCode.E))
         {
-            //InteractUI.enabled = true;
-            isInRange = true;
+            playerMovment.isClimbing = true;
+            topCollider.isTrigger = false;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        
-        if (collision.CompareTag("Player"))
-        {
-            isInRange = false;
-            //playerMovment.isClimbing = false;
-            //topCollider.isTrigger = false;
-            //InteractUI.enabled = false;
-        }
-    }
+    
 }

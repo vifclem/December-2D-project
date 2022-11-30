@@ -1,7 +1,4 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
+
 using UnityEngine;
 
 public class movement_samourail : MonoBehaviour
@@ -66,7 +63,10 @@ public class movement_samourail : MonoBehaviour
         else
         {
             //deplacement vertical
-            transform.position += new Vector3(movementy, 0, 0) * Time.deltaTime * speed;
+            transform.position += new Vector3(0, movementy, 0) * Time.deltaTime * speed;
+            
+            
+            
 
         }
 
