@@ -9,7 +9,10 @@ public class player_health : MonoBehaviour
     public float InvicibilityFlashDelay = 0.2f;
     public float invicibilityTimeAfterHit = 3f;
     public SpriteRenderer graphics;
-
+    public AudioSource audioSource;
+    public AudioClip sound;
+    public AudioSource audioSource2;
+    public AudioClip sound2;
 
     public Health_bar healthBar;
     public static player_health instance;
@@ -32,13 +35,7 @@ public class player_health : MonoBehaviour
     }
 
     
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(60);
-        }
-    }
+    
     public void HealPlayer(int amount)
     {
         if(currentHealth + amount > maxHealth)
@@ -58,7 +55,9 @@ public class player_health : MonoBehaviour
     {
         if (!isInvicible)
         {
+
             currentHealth -= damage;
+            AudioSource.PlayClipAtPoint(sound, transform.position);
             healthBar.SetHealth(currentHealth);
             if(currentHealth <= 0)
             {
@@ -75,6 +74,7 @@ public class player_health : MonoBehaviour
 
     public void Die()
     {
+        AudioSource.PlayClipAtPoint(sound2, transform.position);
         Debug.Log("joueur eliminé");
         movement_samourail.instance.enabled = false;
         movement_samourail.instance.anim.SetTrigger("die");

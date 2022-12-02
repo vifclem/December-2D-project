@@ -5,6 +5,8 @@ using UnityEngine;
 public class player_attack : MonoBehaviour
 {
     public Animator animator;
+    public AudioSource audioSource;
+    public AudioClip sound;
 
     public Transform AttackPoint;
     public LayerMask ennemyLayers;
@@ -23,6 +25,8 @@ public class player_attack : MonoBehaviour
 
     void Attack()
     {
+        AudioSource.PlayClipAtPoint(sound, transform.position);
+
         animator.SetTrigger("attack");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, attackRange, ennemyLayers);
